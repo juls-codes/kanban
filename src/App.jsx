@@ -1,8 +1,8 @@
-function App() {
+import React from 'react'
+
+const App = () => {
   return (
-    <>
-     <h1>Hello Kanban!</h1>
-    </>
+    <div className='font-mono text-white '>Hello Kanban!</div>
   )
 }
 
