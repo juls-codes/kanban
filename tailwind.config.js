@@ -7,8 +7,9 @@ export default {
     extend: {
       colors: {
         'dark': '#21212d',
-        'light': '#2c2c38',
-      }
+        'light': '#2C2C38',
+        'accent': '#625AFF',
+      },
     },
   },
   plugins: [],

@@ -1,8 +1,18 @@
 import React from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Auth from './views/Auth'
 
 const App = () => {
+
   return (
-    <div className='font-mono text-white '>Hello Kanban!</div>
+    <>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Auth />}/>
+        {/* <Route path='/boards' element={}/> */}
+      </Routes>
+    </BrowserRouter>
+    </>
   )
 }
 
