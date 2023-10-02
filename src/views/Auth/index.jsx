@@ -1,32 +1,64 @@
 import Logo from '../../assets/kanban.png';
-import { useState } from "react";
+import { useState } from 'react';
+
+const initForm = {
+  email: '',
+  password: '',
+}
 
 const Auth = () => {
   const [isRegistered, setIsRegistered] = useState(true);
   const authText = isRegistered ? "Don't have an account? Click here to register." : "Already have an account? Click here to login.";
 
+  // Using useState(), we create a state variable with the an initial state that is set to 'initForm'. On render, form will have the same structure as 'initForm', with 'email' and 'password' properties initialized as empty strings.
+  const [form, setForm] = useState(initForm);
+
+  // This function takes an event as its argument. It runs setForm() to update the 'form' state. We use the spread operator on the previous state, 'oldForm', to copy all of its properties to the new state object. We store new values to the object's properties based on the name of the input field that triggered the event, assigning the value to that corresponding property.
+  const handleFormChange = (e) => setForm((oldForm) => ({...oldForm, [e.target.name]: e.target.value}));
+
+  const handleAuth = async () => { 
+    console.log('hello auth!')
+  }
+
+
   return (
     <main className='flex flex-col items-center gap-8 text-sm'>
       <section>
         <div className='flex items-center gap-2 w-fit mx-auto'>
-          <img src={Logo} alt="Project logo" width={20} height={20}/>
+          <img src={Logo} alt='Project logo' width={20} height={20}/>
           <h1 className='text-3xl'>Kanban</h1>
         </div>
         <p className='text-center text-gray-400'>Effortless task management starts here</p>
       </section>
 
       <section className='flex flex-col gap-2 w-[288px]'>
+        <label htmlFor='auth-email' className='font-mono'>Email</label>
         <input
-          type="text"
+          type='text'
+          id='auth-email'
+          name='email'
+          value={form.email}
+          onChange={handleFormChange}
           placeholder='Email'
           className='bg-transparent border border-gray-600 rounded p-2 focus:outline-accent'/>
+
+        <label htmlFor='auth-password' className='font-mono'>Password</label>
         <input
-          type="text"
+          type='text'
+          id='auth-password'
+          name='password'
+          value={form.password}
+          onChange={handleFormChange}
           placeholder='Password'
           className='bg-transparent border border-gray-600 rounded p-2 focus:outline-accent'/>
-        <button className='font-mono bg-accent rounded p-2 focus:outline-accent focus:bg-opacity-80 hover:bg-opacity-80'>
+        <button
+          className='font-mono bg-accent rounded p-2 disabled:bg-light focus:outline-accent focus:bg-opacity-80 hover:bg-opacity-80'
+          onClick={handleAuth}
+          disabled={!form.email.trim() || !form.password.trim()}
+          >
           {isRegistered ? 'Login' : 'Create Account'}
         </button>
+
         <p tabIndex='0'
           onClick={() => setIsRegistered(!isRegistered)}
           onKeyDown={(e) => {
@@ -37,6 +69,7 @@ const Auth = () => {
           className='text-center mt-4 cursor-pointer hover:underline'>
           {authText}        
         </p>
+
       </section>
     </main>
   )
