@@ -1,5 +1,7 @@
 import Logo from '../../assets/kanban.png';
 import { useState } from 'react';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../firebase';
 
 const initForm = {
   email: '',
@@ -7,6 +9,7 @@ const initForm = {
 }
 
 const Auth = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [isRegistered, setIsRegistered] = useState(true);
   const authText = isRegistered ? "Don't have an account? Click here to register." : "Already have an account? Click here to login.";
 
@@ -17,9 +20,19 @@ const Auth = () => {
   const handleFormChange = (e) => setForm((oldForm) => ({...oldForm, [e.target.name]: e.target.value}));
 
   const handleAuth = async () => { 
-    console.log('hello auth!')
-  }
-
+    try {
+      setIsLoading(true);
+      if (isRegistered){
+        await signInWithEmailAndPassword(auth, form.email, form.password);
+      } else {
+        await createUserWithEmailAndPassword(auth, form.email, form.password);
+      }
+    } catch (error) {
+      const msg = error.code.split('auth/')[1].split('-').join(' ').replace(/\b\w/, match => match.toUpperCase());
+      console.log(msg);
+      setIsLoading(false);
+    }
+  };
 
   return (
     <main className='flex flex-col items-center gap-8 text-sm'>
@@ -54,7 +67,7 @@ const Auth = () => {
         <button
           className='font-mono bg-accent rounded p-2 disabled:bg-light focus:outline-accent focus:bg-opacity-80 hover:bg-opacity-80'
           onClick={handleAuth}
-          disabled={!form.email.trim() || !form.password.trim()}
+          disabled={isLoading || !form.email.trim() || !form.password.trim()}
           >
           {isRegistered ? 'Login' : 'Create Account'}
         </button>
