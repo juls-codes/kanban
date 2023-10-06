@@ -5,6 +5,9 @@ import AuthView from './views/AuthView';
 import { auth } from './firebase';
 import useStore from './store';
 import AppLoader from './components/AppLoader';
+import PublicRoute from './utils/PublicRoute';
+import BoardsView from './views/BoardsView';
+import PrivateRoute from './utils/PrivateRoute';
 
 const App = () => {
   const { loader, setLoginStatus } = useStore();
@@ -24,8 +27,8 @@ const App = () => {
     <>
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<AuthView />}/>
-        {/* <Route path='/boards' element={}/> */}
+        <Route path='/' element={<PublicRoute Component={AuthView} />}/>
+        <Route path='/boards' element={<PrivateRoute Component={BoardsView} />}/>
       </Routes>
     </BrowserRouter>
     </>
