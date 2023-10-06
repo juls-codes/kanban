@@ -1,8 +1,11 @@
+// import { useState } from 'react';
 import { TbPlus } from 'react-icons/tb';
 import { TbLogout } from 'react-icons/tb';
 import Logo from '../assets/kanban.png';
 
 const BoardsHeader = () => {
+
+
   return (
     <header className='bg-light p-4 pt-8 flex justify-between drop-shadow-md'>
 
@@ -21,7 +24,7 @@ const BoardsHeader = () => {
           <span className='text-base hidden mx-2 sm:inline'>Logout</span>
         </button>
       </div>
-      
+
     </header>
   )
 }

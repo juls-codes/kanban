@@ -65,7 +65,7 @@ const AuthView = () => {
           placeholder='Password'
           className='bg-transparent border border-gray-600 rounded p-2 focus:outline-accent'/>
         <button
-          className='font-mono bg-accent rounded p-2 disabled:bg-light focus:outline-accent focus:bg-opacity-80 hover:bg-opacity-80'
+          className='font-mono bg-accent rounded p-2 mt-2 disabled:bg-light focus:outline-accent focus:bg-opacity-80 hover:bg-opacity-80'
           onClick={handleAuth}
           disabled={isLoading || !form.email.trim() || !form.password.trim()}
           >
