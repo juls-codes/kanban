@@ -1,14 +1,14 @@
-import Logo from '../../assets/kanban.png';
+import Logo from '../assets/kanban.png';
 import { useState } from 'react';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../../firebase';
+import { auth } from '../firebase';
 
 const initForm = {
   email: '',
   password: '',
 }
 
-const Auth = () => {
+const AuthView = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isRegistered, setIsRegistered] = useState(true);
   const authText = isRegistered ? "Don't have an account? Click here to register." : "Already have an account? Click here to login.";
@@ -88,4 +88,4 @@ const Auth = () => {
   )
 }
 
-export default Auth
+export default AuthView
