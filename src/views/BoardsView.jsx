@@ -1,6 +1,12 @@
+import BoardsHeader from '../components/BoardsHeader';
+
 const BoardsView = () => {
   return (
-    <div>BoardsView</div>
+    <main>
+      <BoardsHeader />
+      <p>BoardsView</p>
+    </main>
+    
   )
 }
 

@@ -35,7 +35,7 @@ const AuthView = () => {
   };
 
   return (
-    <main className='flex flex-col items-center gap-8 text-sm'>
+    <main className='h-screen text-sm flex flex-col items-center justify-center gap-8 '>
       <section>
         <div className='flex items-center gap-2 w-fit mx-auto'>
           <img src={Logo} alt='Project logo' width={20} height={20}/>
