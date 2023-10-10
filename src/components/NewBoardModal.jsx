@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { MdOutlineClose } from 'react-icons/md';
 
-const NewBoardModal = () => {
+const NewBoardModal = ({ closeModal }) => {
   const [name, setName] = useState('');
   const [boardColour, setBoardColour] = useState(0);
+  const modal = useRef();
 
   const colourChoices = [
     {hex: '#fb7185', label: 'Red'},
@@ -14,14 +15,33 @@ const NewBoardModal = () => {
     {hex: '#60a5fa', label: 'Blue'}
   ];
 
+  // Close Create Board panel when click occurs outside ref
+  useEffect(() => {
+    const handleClose = (e) => {
+      if (modal.current && !modal.current.contains(e.target)){
+        closeModal();
+        console.log('Clicked outside modal')
+      }
+    };
+    document.addEventListener("click", handleClose, true);
+    document.addEventListener("touchstart", handleClose, true);
+    return() => {
+      document.removeEventListener("click", handleClose, true);
+      document.removeEventListener("touchstart", handleClose, true);
+    };
+  }, [closeModal]);
+
   console.log(name, boardColour);
 
 
   return (
-    <div className='bg-light font-mono rounded shadow-md p-4 m-8'>
+    <div ref={modal} className='bg-light font-mono rounded shadow-md p-4 m-8'>
       <div className='flex justify-between items-center'>
         <h3 className='text-xl'>Create Board</h3>
-        <button aria-label='Close pop-up' className='text-lg rounded p-2 hover:bg-dark'><MdOutlineClose /></button>
+        <button
+          onClick={closeModal}
+          aria-label='Close Create Board panel'
+          className='text-lg rounded p-2 hover:bg-dark'><MdOutlineClose /></button>
       </div>
 
       <label className='flex flex-col gap-2 my-4'>

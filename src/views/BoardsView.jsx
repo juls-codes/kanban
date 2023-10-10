@@ -1,12 +1,15 @@
 import BoardsHeader from '../components/BoardsHeader';
 import NewBoardModal from '../components/NewBoardModal';
+import { useState } from 'react';
 
 const BoardsView = () => {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <main>
-      <BoardsHeader />
+      <BoardsHeader openModal={() => setShowModal(true)}/>
       <p>BoardsView</p>
-      <NewBoardModal />
+      { showModal && <NewBoardModal closeModal={() => setShowModal(false)}/> }
     </main>
     
   )

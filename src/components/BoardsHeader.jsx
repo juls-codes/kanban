@@ -3,8 +3,7 @@ import { TbPlus } from 'react-icons/tb';
 import { TbLogout } from 'react-icons/tb';
 import Logo from '../assets/kanban.png';
 
-const BoardsHeader = () => {
-
+const BoardsHeader = ({ openModal }) => {
 
   return (
     <header className='bg-light p-4 pt-8 flex justify-between drop-shadow-md'>
@@ -15,11 +14,16 @@ const BoardsHeader = () => {
       </div>
 
       <div className='text-2xl flex'>
-        <button aria-label='Create Board' className='bg-accent p-1 rounded mr-3 h-fit flex hover:bg-dark'>
-          <TbPlus />
-          <span className='text-base hidden mx-2 sm:inline'>Create Board</span>
+        <button
+          onClick={openModal}
+          aria-label='Create Board'
+          className='bg-accent p-1 rounded mr-3 h-fit flex hover:bg-dark'>
+            <TbPlus />
+            <span className='text-base hidden mx-2 sm:inline'>Create Board</span>
         </button>
-        <button aria-label='Logout' className='p-1 flex h-fit hover:bg-dark rounded'>
+        <button
+          aria-label='Logout'
+          className='p-1 flex h-fit hover:bg-dark rounded'>
           <TbLogout />
           <span className='text-base hidden mx-2 sm:inline'>Logout</span>
         </button>
