@@ -7,17 +7,20 @@ const BoardsView = () => {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <main className='w-screen min-h-screen flex flex-col'>
+    <>
       <BoardsHeader openModal={() => setShowModal(true)}/>
       { showModal && <NewBoardModal closeModal={() => setShowModal(false)}/> }
-      <h1 className='text-2xl m-4 text-gray-400'>All Boards</h1>
-      <section className='m-4'>
-        <div>
+      
+      <main className='m-6 grow'>
+        <section className='max-w-xl mx-auto sm:grid grid-cols-2 lg:grid-cols-3 gap-4'>
+          <h1 className='text-2xl text-gray-400 col-span-full'>All Boards</h1>
           <BoardCard />
-        </div>
-      </section>
-    </main>
-    
+          <BoardCard />
+          <BoardCard />
+        </section>
+      </main>
+
+    </>
   )
 }
 

@@ -16,10 +16,16 @@ export default {
       },
       gridTemplateRows: {
         'boardCard': '1fr, auto'
+      },
+      maxWidth: {
+        'xl': '1920px',
       }
     },
     screens: {
       'xs': '400px',
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
     },
   },
   plugins: [],
