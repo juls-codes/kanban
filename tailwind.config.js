@@ -11,6 +11,12 @@ export default {
         'light': '#2C2C38',
         'accent': '#625AFF',
       },
+      gridTemplateColumns: {
+        'boardCard': '1fr, auto'
+      },
+      gridTemplateRows: {
+        'boardCard': '1fr, auto'
+      }
     },
     screens: {
       'xs': '400px',
