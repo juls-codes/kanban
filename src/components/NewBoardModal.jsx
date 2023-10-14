@@ -1,21 +1,13 @@
 import { useEffect, useState, useRef } from 'react';
 import { MdOutlineClose } from 'react-icons/md';
 import useApp from '../utils/useApp';
+import colourChoices from '../utils/colourChoices';
 
 const NewBoardModal = ({ closeModal }) => {
   const [name, setName] = useState('');
   const [boardColour, setBoardColour] = useState(0);
   const [loading, setLoading] = useState(false);
   const modal = useRef();
-
-  const colourChoices = [
-    {hex: '#fb7185', label: 'Red'},
-    {hex: '#fb923c', label: 'Orange'},
-    {hex: '#facc15', label: 'Yellow'},
-    {hex: '#a3e635', label: 'Lime'},
-    {hex: '#22d3ee', label: 'Cyan'},
-    {hex: '#60a5fa', label: 'Blue'}
-  ];
 
   const { createBoard } = useApp();
   const handleCreate = async() => {
@@ -34,7 +26,6 @@ const NewBoardModal = ({ closeModal }) => {
     const handleClose = (e) => {
       if (modal.current && !modal.current.contains(e.target)){
         closeModal();
-        console.log('Clicked outside modal')
       }
     };
     document.addEventListener("click", handleClose, true);
@@ -44,8 +35,6 @@ const NewBoardModal = ({ closeModal }) => {
       document.removeEventListener("touchstart", handleClose, true);
     };
   }, [closeModal]);
-
-  console.log(name, boardColour);
 
   return (
     <div ref={modal} className='bg-light font-mono rounded shadow-md p-4 m-8'>
