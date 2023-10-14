@@ -1,9 +1,11 @@
 import { useEffect, useState, useRef } from 'react';
 import { MdOutlineClose } from 'react-icons/md';
+import useApp from '../utils/useApp';
 
 const NewBoardModal = ({ closeModal }) => {
   const [name, setName] = useState('');
   const [boardColour, setBoardColour] = useState(0);
+  const [loading, setLoading] = useState(false);
   const modal = useRef();
 
   const colourChoices = [
@@ -14,6 +16,18 @@ const NewBoardModal = ({ closeModal }) => {
     {hex: '#22d3ee', label: 'Cyan'},
     {hex: '#60a5fa', label: 'Blue'}
   ];
+
+  const { createBoard } = useApp();
+  const handleCreate = async() => {
+    try {
+      setLoading(true);
+      await createBoard({ name, boardColour });
+      closeModal();
+    } catch(err){
+      setLoading(false);
+      console.log(err);
+    }
+  }
 
   // Close Create Board panel when click occurs outside ref
   useEffect(() => {
@@ -32,7 +46,6 @@ const NewBoardModal = ({ closeModal }) => {
   }, [closeModal]);
 
   console.log(name, boardColour);
-
 
   return (
     <div ref={modal} className='bg-light font-mono rounded shadow-md p-4 m-8'>
@@ -56,8 +69,8 @@ const NewBoardModal = ({ closeModal }) => {
         />
       </label>
 
-      <div className='my-4 flex flex-col gap-2 xs:flex-row xs:gap-4'>
-        <label htmlFor='colour-selection'>Colour:</label>
+      <fieldset className='my-4 flex flex-col gap-2 xs:flex-row xs:gap-4'>
+        <legend className='colour-selection'>Colour:</legend>
         <div className='flex justify-evenly gap-3 flex-wrap'>
           {colourChoices.map((colour, idx) => (
             <label key={idx}>
@@ -76,9 +89,9 @@ const NewBoardModal = ({ closeModal }) => {
             </label>
           ))}
         </div>
-      </div>
+      </fieldset>
 
-      <button className='bg-accent rounded w-full p-2 mb-2'>Create</button>
+      <button onClick={handleCreate} disabled={loading} className='bg-accent rounded w-full p-2 mb-2'>Create</button>
 
     </div>
   )
