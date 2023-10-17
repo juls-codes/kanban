@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { MdOutlineClose } from 'react-icons/md';
 import useApp from '../utils/useApp';
 import colourChoices from '../utils/colourChoices';
+import { toast } from 'react-toastify';
 
 const NewBoardModal = ({ closeModal }) => {
   const [name, setName] = useState('');
@@ -15,6 +16,7 @@ const NewBoardModal = ({ closeModal }) => {
       setLoading(true);
       await createBoard({ name, boardColour });
       closeModal();
+      toast(`'${name}' board created`);
     } catch(err){
       setLoading(false);
       console.log(err);
