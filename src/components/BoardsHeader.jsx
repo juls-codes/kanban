@@ -2,6 +2,8 @@
 import { TbPlus } from 'react-icons/tb';
 import { TbLogout } from 'react-icons/tb';
 import Logo from '../assets/kanban.png';
+import { signOut } from 'firebase/auth';
+import { auth } from '../firebase'
 
 const BoardsHeader = ({ openModal }) => {
 
@@ -22,6 +24,7 @@ const BoardsHeader = ({ openModal }) => {
             <span className='text-base hidden mx-2 sm:inline'>Create Board</span>
         </button>
         <button
+          onClick={() => signOut(auth)}
           aria-label='Logout'
           className='p-1 rounded flex h-fit hover:bg-dark focus:bg-dark outline-accent'>
           <TbLogout />

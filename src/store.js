@@ -21,6 +21,8 @@ const useStore = create(set => ({
     set({
       loader: false,
       isLoggedIn: status,
+      boards: [],
+      areBoardsFetched: false
     }),
   
 }));
