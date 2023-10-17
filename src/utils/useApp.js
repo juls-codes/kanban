@@ -2,7 +2,9 @@ import {
   addDoc,
   getDocs,
   collection,
-  serverTimestamp
+  serverTimestamp,
+  query,
+  orderBy
 } from 'firebase/firestore';
 import { db } from '../firebase';
 import { getAuth } from 'firebase/auth';
@@ -12,7 +14,7 @@ import useStore from '../store';
 const useApp = () => {
   const { currentUser: { uid } } = getAuth();
   const collectionRef = collection(db, `users/${uid}/boards`);
-  const { setBoards } = useStore();
+  const { setBoards, addBoard } = useStore();
 
   // This function creates a new 'board' document in the user's 'boards' collection. It points to the 'boards' collection using the path defined within 'collectionRef' reference.
   const createBoard = async ({ name, boardColour }) => {
@@ -22,6 +24,7 @@ const useApp = () => {
         boardColour,
         createdAt: serverTimestamp(),
       });
+      addBoard ({ name, boardColour, createdAt: new Date().toLocaleDateString() });
     } catch(err) {
       console.log(err);
     }
@@ -30,14 +33,16 @@ const useApp = () => {
   // This function fetches all the 'board' documents in the user's 'boards' collection. If no error, the promise resolves to an object containing an array of documents, each representing a single 'board'. The documents are mapped into a new array where each document transformed into a new object with additional properties.
   const fetchBoards = async(setLoading) => {
     try {
-      const fetchedBoardDocs = await getDocs(collectionRef);
+      const q = query(collectionRef, orderBy('createdAt', 'desc'));
+      const fetchedBoardDocs = await getDocs(q);
+
       const boards = fetchedBoardDocs.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
         createdAt: doc.data().createdAt.toDate().toLocaleDateString(),
       }));
       setBoards(boards);
-      console.log(boards);
+      
     } catch(err) {
       console.log(err);      
     } finally {
