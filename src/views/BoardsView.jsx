@@ -11,7 +11,7 @@ const BoardsView = () => {
   const [loading, setLoading] = useState(false);
   const { fetchBoards } = useApp();
   const { boards, areBoardsFetched } = useStore();
-
+  
   useEffect(() => {
     if (!areBoardsFetched) {
       fetchBoards(setLoading);

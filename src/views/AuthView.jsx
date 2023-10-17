@@ -2,6 +2,8 @@ import Logo from '../assets/kanban.png';
 import { useState } from 'react';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../firebase';
+import useStore from '../store';
+import { toast } from 'react-toastify';
 
 const initForm = {
   email: '',
@@ -12,6 +14,7 @@ const AuthView = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isRegistered, setIsRegistered] = useState(true);
   const authText = isRegistered ? "Don't have an account? Click here to register." : "Already have an account? Click here to login.";
+  const { setToastr } = useStore();
 
   // Using useState(), we create a state variable with the an initial state that is set to 'initForm'. On render, form will have the same structure as 'initForm', with 'email' and 'password' properties initialized as empty strings.
   const [form, setForm] = useState(initForm);
@@ -30,6 +33,7 @@ const AuthView = () => {
     } catch (error) {
       const msg = error.code.split('auth/')[1].split('-').join(' ').replace(/\b\w/, match => match.toUpperCase());
       console.log(msg);
+      toast(msg);
       setIsLoading(false);
     }
   };

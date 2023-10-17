@@ -7,6 +7,7 @@ const useStore = create(set => ({
   isLoggedIn: false,
   boards: [],
   areBoardsFetched: false,
+  toastrMsg: '',
   setBoards: (boards) =>
     set({
       boards,

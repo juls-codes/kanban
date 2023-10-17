@@ -8,6 +8,7 @@ import AppLoader from './components/AppLoader';
 import PublicRoute from './utils/PublicRoute';
 import BoardsView from './views/BoardsView';
 import PrivateRoute from './utils/PrivateRoute';
+import ToastrManager from './components/ToastrManager';
 
 const App = () => {
   const { loader, setLoginStatus } = useStore();
@@ -25,6 +26,7 @@ const App = () => {
 
   return (
     <>
+    <ToastrManager />
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<PublicRoute Component={AuthView} />}/>
