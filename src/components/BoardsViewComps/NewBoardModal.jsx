@@ -23,7 +23,7 @@ const NewBoardModal = ({ closeModal }) => {
     }
   }
 
-  // Close Create Board panel when click occurs outside ref
+  // Close Create Board modal when click occurs outside ref
   useEffect(() => {
     const handleClose = (e) => {
       if (modal.current && !modal.current.contains(e.target)){
@@ -39,14 +39,15 @@ const NewBoardModal = ({ closeModal }) => {
   }, [closeModal]);
 
   return (
-    <div ref={modal} className='bg-light font-mono rounded shadow-md p-4 m-8'>
-      <div className='flex justify-between items-center'>
-        <h3 className='text-xl'>Create Board</h3>
-        <button
-          onClick={closeModal}
-          aria-label='Close Create Board panel'
-          className='text-lg rounded p-2 hover:bg-dark focus:bg-dark outline-accent'><MdOutlineClose /></button>
-      </div>
+    <div className='absolute w-full h-full bg-dark/90 flex justify-center items-center'>
+    <div ref={modal} className='bg-light font-mono rounded shadow-md max-w-[400px] w-full h-fit p-4 relative mx-6'>
+      <h3 className='text-xl'>Create Board</h3>
+      <button
+        onClick={closeModal}
+        aria-label='Close Create Board modal'
+        className='text-lg rounded p-2 absolute top-3 right-2 hover:bg-dark focus:bg-dark outline-accent'>
+          <MdOutlineClose />
+      </button>
 
       <label className='flex flex-col gap-2 my-4'>
         Board Name:
@@ -60,16 +61,16 @@ const NewBoardModal = ({ closeModal }) => {
         />
       </label>
 
-      <fieldset className='my-4 space-y-2'>
-        <legend>Colour:</legend>
-        <div className='flex justify-evenly gap-3 flex-wrap xs:w-fit'>
+      <fieldset className='flex items-center my-4 space-y-2'>
+        <legend className='xs:float-left mr-2'>Colour:</legend>
+        <div className='flex flex-wrap gap-3 w-fit mx-auto xs:mx-0'>
           {colourChoices.map((colour, idx) => (
             <label key={idx}>
               <input
                 type='radio'
                 name='colour-selection'
                 onClick={() => setBoardColour(idx)}
-                className='cursor-pointer appearance-none w-6 h-6 rounded-full'
+                className='cursor-pointer appearance-none rounded-full w-6 h-6'
                 style={{
                   backgroundColor: colour.hex,
                   border: boardColour === idx ? '3px solid #2C2C38' : 'none',
@@ -84,6 +85,7 @@ const NewBoardModal = ({ closeModal }) => {
 
       <button onClick={handleCreate} disabled={loading} className='bg-accent rounded w-full p-2 mb-2 hover:bg-dark focus:bg-dark outline-accent'>Create</button>
 
+    </div>
     </div>
   )
 }
