@@ -12,10 +12,11 @@ export default {
         'accent': '#625AFF',
       },
       gridTemplateColumns: {
-        'boardCard': '1fr, auto'
+        'frAuto': '1fr, auto'
       },
       gridTemplateRows: {
-        'boardCard': '1fr, auto'
+        'frAuto': '1fr, auto',
+        'frAutoAuto': '1fr, auto, auto'
       },
       maxWidth: {
         'xl': '1920px',

@@ -15,7 +15,7 @@ const ToastrManager = () => {
   return (
     <div>
       <ToastContainer
-        position="bottom-right"
+        position='bottom-right'
         autoClose={3000}
         limit={3}
         hideProgressBar

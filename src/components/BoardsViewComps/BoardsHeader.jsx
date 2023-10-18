@@ -1,9 +1,7 @@
-// import { useState } from 'react';
-import { TbPlus } from 'react-icons/tb';
-import { TbLogout } from 'react-icons/tb';
-import Logo from '../assets/kanban.png';
 import { signOut } from 'firebase/auth';
-import { auth } from '../firebase'
+import { auth } from '../../firebase'
+import { TbLogout, TbPlus } from 'react-icons/tb';
+import Logo from '../../assets/kanban.png';
 
 const BoardsHeader = ({ openModal }) => {
 

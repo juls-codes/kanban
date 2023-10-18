@@ -1,8 +1,8 @@
 import AppLoader from '../components/AppLoader';
-import BoardsHeader from '../components/BoardsHeader';
-import NewBoardModal from '../components/NewBoardModal';
+import BoardsHeader from '../components/BoardsViewComps/BoardsHeader';
+import NewBoardModal from '../components/BoardsViewComps/NewBoardModal';
 import { useEffect, useState } from 'react';
-import BoardCard from '../components/BoardCard';
+import BoardCard from '../components/BoardsViewComps/BoardCard';
 import useApp from '../utils/useApp';
 import useStore from '../store';
 

@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { MdOutlineClose } from 'react-icons/md';
-import useApp from '../utils/useApp';
-import colourChoices from '../utils/colourChoices';
+import useApp from '../../utils/useApp';
+import colourChoices from '../../utils/colourChoices';
 import { toast } from 'react-toastify';
 
 const NewBoardModal = ({ closeModal }) => {
@@ -30,11 +30,11 @@ const NewBoardModal = ({ closeModal }) => {
         closeModal();
       }
     };
-    document.addEventListener("click", handleClose, true);
-    document.addEventListener("touchstart", handleClose, true);
+    document.addEventListener('click', handleClose, true);
+    document.addEventListener('touchstart', handleClose, true);
     return() => {
-      document.removeEventListener("click", handleClose, true);
-      document.removeEventListener("touchstart", handleClose, true);
+      document.removeEventListener('click', handleClose, true);
+      document.removeEventListener('touchstart', handleClose, true);
     };
   }, [closeModal]);
 
@@ -45,7 +45,7 @@ const NewBoardModal = ({ closeModal }) => {
         <button
           onClick={closeModal}
           aria-label='Close Create Board panel'
-          className='text-lg rounded p-2 hover:bg-dark'><MdOutlineClose /></button>
+          className='text-lg rounded p-2 hover:bg-dark focus:bg-dark outline-accent'><MdOutlineClose /></button>
       </div>
 
       <label className='flex flex-col gap-2 my-4'>
@@ -60,9 +60,9 @@ const NewBoardModal = ({ closeModal }) => {
         />
       </label>
 
-      <fieldset className='my-4 flex flex-col gap-2 xs:flex-row xs:gap-4'>
-        <legend className='colour-selection'>Colour:</legend>
-        <div className='flex justify-evenly gap-3 flex-wrap'>
+      <fieldset className='my-4 space-y-2'>
+        <legend>Colour:</legend>
+        <div className='flex justify-evenly gap-3 flex-wrap xs:w-fit'>
           {colourChoices.map((colour, idx) => (
             <label key={idx}>
               <input
@@ -82,7 +82,7 @@ const NewBoardModal = ({ closeModal }) => {
         </div>
       </fieldset>
 
-      <button onClick={handleCreate} disabled={loading} className='bg-accent rounded w-full p-2 mb-2'>Create</button>
+      <button onClick={handleCreate} disabled={loading} className='bg-accent rounded w-full p-2 mb-2 hover:bg-dark focus:bg-dark outline-accent'>Create</button>
 
     </div>
   )
