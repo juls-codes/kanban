@@ -8,26 +8,26 @@ import BoardHeader from '../components/BoardViewComps/BoardHeader';
 import BoardInterface from '../components/BoardViewComps/BoardInterface';
 
 const BoardView = () => {
+  const navigate = useNavigate();
+  const [data, setData] = useState(null);
+  const [lastUpdated, setLastUpdated] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   // To access data of the board from the document stored in the 'boards' collection, we'll use the board ID from the params
   const { boards, areBoardsFetched } = useStore();
   const { boardId } = useParams();
-  const board = useMemo(() => boards.find( b => b.id === boardId), []);
-
-  const navigate = useNavigate();
   const { fetchBoard } = useApp();
-
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState(null);
-  const [lastUpdated, setLastUpdated] = useState(null);
-
-  console.log(data, lastUpdated, loading);
   
+  const board = useMemo(() => boards.find( b => b.id === boardId), []);
+  const boardData = useMemo(() => data, [data]);
+  
+
   const handleFetchBoard = async() => {
     try {
       const boardData = await fetchBoard(boardId);
       if (boardData) {
         const { lastUpdated, tabs } = boardData;
-        setData(boardData);
+        setData(tabs);
         setLastUpdated(lastUpdated.toDate().toLocaleString('en-US'));
       };
       setLoading(false);
@@ -54,7 +54,7 @@ const BoardView = () => {
       <main className='m-6'>
         <h1 className='text-2xl'>{board.name}</h1>
         <p className='text-gray-400 text-sm'>Last updated: {lastUpdated}</p>
-        <BoardInterface />
+        <BoardInterface boardData={boardData} />
       </main>
     </>
   )

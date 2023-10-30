@@ -1,9 +1,12 @@
 import { TbPlus } from 'react-icons/tb';
 import TaskCard from './TaskCard';
 
-const BoardTab = ({ statusName, addTask }) => {
+const TaskStatus = ({ statusName, addTask, tasks }) => {
+
+  console.log('hello task sections', statusName, tasks)
+
   return (
-    <section className='my-4 grid grid-cols-frAuto items-center gap-2'>
+    <section className='my-4 h-fit grid grid-cols-frAuto items-center gap-2 '>
       <h2 className='uppercase text-gray-400'>{statusName}</h2>
       <button
         onClick={addTask}
@@ -11,10 +14,15 @@ const BoardTab = ({ statusName, addTask }) => {
       </button>
 
       <ul className='space-y-2 col-span-2'>
-        {/* <TaskCard /> */}
+        {tasks.map((task) => (
+          <TaskCard
+            key={task.id}
+            id={task.id}
+            text={task.text} />
+        ))}
       </ul>
   </section>
   )
 }
 
-export default BoardTab
+export default TaskStatus

@@ -6,13 +6,14 @@ import { useState } from 'react';
  For each 'status' (representing task status), a 'BoardTab' component is created with its key set to the current 'status' and 'statusName' set to the value associated with the current 'status' key.
 */
 const statuses = {
-  todo: 'To Do',
+  toDo: 'To Do',
   inProgress: 'In Progress',
   completed: 'Completed'
 };
 
-const BoardInterface = () => {
-  const [addTaskto, setAddTaskTo] = useState('')
+const BoardInterface = ({boardData}) => {
+  const [addTaskto, setAddTaskTo] = useState('');
+  const [tasks, setTasks] = useState(boardData);
 
   return (
     <>
@@ -24,11 +25,12 @@ const BoardInterface = () => {
       }
 
       <div className='sm:grid grid-cols-3 gap-4 lg:gap-6'>
-        { Object.keys(statuses).map(status =>
+        { Object.keys(statuses).map(status => 
           <TaskStatus
-            key={status}
-            statusName={statuses[status]}
-            addTask={() => setAddTaskTo(status)}
+          key={status}
+          tasks={tasks[status]}
+          statusName={statuses[status]}
+          addTask={() => setAddTaskTo(status)}
           />
         )}
       </div>
