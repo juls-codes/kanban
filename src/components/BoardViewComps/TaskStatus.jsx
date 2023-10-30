@@ -11,7 +11,7 @@ const BoardTab = ({ statusName, addTask }) => {
       </button>
 
       <ul className='space-y-2 col-span-2'>
-        <TaskCard />
+        {/* <TaskCard /> */}
       </ul>
   </section>
   )
