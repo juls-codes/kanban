@@ -19,12 +19,17 @@ const useApp = () => {
   // This function creates a new 'board' document in the user's 'boards' collection. It points to the 'boards' collection using the path defined within 'collectionRef' reference.
   const createBoard = async ({ name, boardColour }) => {
     try {
-      await addDoc(collectionRef, {
+      const doc = await addDoc(collectionRef, {
         name,
         boardColour,
         createdAt: serverTimestamp(),
       });
-      addBoard ({ name, boardColour, createdAt: new Date().toLocaleDateString() });
+      addBoard ({
+        name,
+        boardColour,
+        createdAt: new Date().toLocaleString('en-US'),
+        id: doc.id
+      });
     } catch(err) {
       console.log(err);
     }
@@ -39,7 +44,7 @@ const useApp = () => {
       const boards = fetchedBoardDocs.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
-        createdAt: doc.data().createdAt.toDate().toLocaleDateString(),
+        createdAt: doc.data().createdAt.toDate().toLocaleString('en-US'),
       }));
       setBoards(boards);
       
