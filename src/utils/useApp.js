@@ -6,7 +6,8 @@ import {
   getDocs,
   orderBy,
   query,
-  serverTimestamp
+  serverTimestamp,
+  updateDoc
 } from 'firebase/firestore';
 import { db } from '../firebase';
 import { getAuth } from 'firebase/auth';
@@ -18,8 +19,17 @@ const useApp = () => {
   const collectionRef = collection(db, `users/${uid}/boards`);
   const { setBoards, addBoard } = useStore();
 
+  const updateBoard = async(boardId, tabs) => {
+    const docRef = doc(db, `users/${uid}/boardsData/${boardId}`);
+    try {
+      await updateDoc(docRef, { tabs });
+    } catch(err) {
+      console.log(err);
+    };
+  }
+
   // This function creates a new 'board' document in the user's 'boards' collection. It points to the 'boards' collection using the path defined within 'collectionRef' reference.
-  const createBoard = async ({ name, boardColour }) => {
+  const createBoard = async (name, boardColour) => {
     try {
       const doc = await addDoc(collectionRef, {
         name,
@@ -72,7 +82,7 @@ const useApp = () => {
     }
   }
 
-  return { createBoard, fetchBoard, fetchBoards };
+  return { createBoard, fetchBoard, fetchBoards, updateBoard };
 }
 
 export default useApp

@@ -54,7 +54,7 @@ const BoardView = () => {
       <main className='m-6'>
         <h1 className='text-2xl'>{board.name}</h1>
         <p className='text-gray-400 text-sm'>Last updated: {lastUpdated}</p>
-        <BoardInterface boardData={boardData} />
+        <BoardInterface boardData={boardData} boardId={boardId} />
       </main>
     </>
   )

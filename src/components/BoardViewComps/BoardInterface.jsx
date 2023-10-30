@@ -1,6 +1,7 @@
 import TaskStatus from './TaskStatus';
 import AddTaskModal from './AddTaskModal';
 import { useState } from 'react';
+import useApp from '../../utils/useApp';
 
 /* We map over the keys in this 'statuses' object to retrieve an array of keys.
  For each 'status' (representing task status), a 'BoardTab' component is created with its key set to the current 'status' and 'statusName' set to the value associated with the current 'status' key.
@@ -11,9 +12,23 @@ const statuses = {
   completed: 'Completed'
 };
 
-const BoardInterface = ({boardData}) => {
+const BoardInterface = ({boardData, boardId}) => {
   const [addTaskto, setAddTaskTo] = useState('');
-  const [tasks, setTasks] = useState(boardData);
+  const [tasks, setTasks] = useState(structuredClone(boardData));
+  const { updateBoard } = useApp();
+
+  const handleAddTask = async(text) => {
+    const clone = structuredClone(tasks);
+    clone[addTaskto].unshift({ id: crypto.randomUUID(), text})
+
+    try {
+      await updateBoard(boardId, clone);
+      setTasks(clone);
+      setAddTaskTo('');
+    } catch(err){
+      console.log(err);
+    }
+  }
 
   return (
     <>
@@ -21,6 +36,7 @@ const BoardInterface = ({boardData}) => {
         <AddTaskModal
           statusName={statuses[addTaskto]}
           onClose={() => setAddTaskTo('')}
+          addTask={handleAddTask}
         />
       }
 

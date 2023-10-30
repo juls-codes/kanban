@@ -1,12 +1,12 @@
 import { MdOutlineClose } from 'react-icons/md'
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-const AddTaskModal = ({ statusName, onClose }) => {
-  console.log(statusName);
+const AddTaskModal = ({ statusName, onClose, addTask }) => {
   const modal = useRef();
+  const [text, setText] = useState('');
 
-   // Close Create Board modal when click occurs outside ref
-   useEffect(() => {
+  // Close Create Board modal when click occurs outside ref
+  useEffect(() => {
     const handleClose = (e) => {
       if (modal.current && !modal.current.contains(e.target)){
         onClose();
@@ -34,13 +34,15 @@ const AddTaskModal = ({ statusName, onClose }) => {
 
       <input
         type="text"
+        value={text}
+        onChange={e => setText(e.target.value)}
         className='font-sans bg-transparent border border-gray-600 rounded w-full p-2 focus:outline-accent'
         placeholder="What's your task?"
       />
 
       <p className='my-4'>Status: {statusName}</p>
 
-      <button className='bg-accent rounded w-full p-2 mb-2 hover:bg-dark focus:bg-dark outline-accent'>Add</button>
+      <button onClick={() => addTask(text)} className='bg-accent rounded w-full p-2 mb-2 hover:bg-dark focus:bg-dark outline-accent'>Add</button>
       </div>
     </div>
   )
