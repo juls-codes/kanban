@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import useStore from '../store';
 import useApp from '../utils/useApp';
 
@@ -36,6 +36,10 @@ const BoardView = () => {
     }
   };
 
+  // useCallback hook is used to memoize our fnction to ensure it doesn't change on every render unless its dependencies change
+  const handleUpdateLastUpdated = useCallback(() => 
+    setLastUpdated(new Date().toLocaleString('en-US')), []);
+
   // If the user's Boards are not fetched, or if the particular Board does not exist within the database, push the user to the BoardsView. Otherwise, fetch the board data using handleFetchBoard().
   useEffect(() => {
     if(!areBoardsFetched || !board){
@@ -54,7 +58,7 @@ const BoardView = () => {
       <main className='m-6'>
         <h1 className='text-2xl'>{board.name}</h1>
         <p className='text-gray-400 text-sm'>Last updated: {lastUpdated}</p>
-        <BoardInterface boardData={boardData} boardId={boardId} />
+        <BoardInterface boardData={boardData} boardId={boardId} updateLastUpdated={handleUpdateLastUpdated} />
       </main>
     </>
   )

@@ -12,7 +12,7 @@ const statuses = {
   completed: 'Completed'
 };
 
-const BoardInterface = ({boardData, boardId}) => {
+const BoardInterface = ({boardData, boardId, updateLastUpdated}) => {
   const [addTaskto, setAddTaskTo] = useState('');
   const [tasks, setTasks] = useState(structuredClone(boardData));
   const { updateBoard } = useApp();
@@ -25,6 +25,7 @@ const BoardInterface = ({boardData, boardId}) => {
       await updateBoard(boardId, clone);
       setTasks(clone);
       setAddTaskTo('');
+      updateLastUpdated();
     } catch(err){
       console.log(err);
     }
