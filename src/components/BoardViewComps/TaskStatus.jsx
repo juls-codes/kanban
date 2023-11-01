@@ -1,27 +1,38 @@
 import { TbPlus } from 'react-icons/tb';
 import TaskCard from './TaskCard';
+import Droppable from '../../utils/StrictModeDroppable';
+import colourChoices from '../../utils/colourChoices';
 
-const TaskStatus = ({ statusName, addTask, tasks, status, deleteTask }) => {
+const TaskStatus = ({ statusName, addTask, tasks, status, deleteTask, boardColour }) => {
 
   return (
-    <section className='my-4 h-fit grid grid-cols-frAuto items-center gap-2 '>
-      <h2 className='uppercase text-gray-400'>{statusName}</h2>
-      <button
-        onClick={addTask}
-        className='p-2 text-2xl rounded h-fit hover:bg-light focus:bg-light outline-accent'><TbPlus />
-      </button>
+    <Droppable droppableId={status}>
+      {(provided) => 
+      <section className='my-4 grid grid-cols-frAuto h-fit items-center'>
+        <h2 className='uppercase text-gray-400'>{statusName}</h2>
+        <button
+          onClick={addTask}
+          className='p-2 text-2xl rounded h-max hover:bg-light focus:bg-light outline-accent'><TbPlus />
+        </button>
 
-      <ul className='space-y-2 col-span-2'>
-        {tasks.map((task) => (
-          <TaskCard
-            key={task.id}
-            id={task.id}
-            text={task.text}
-            deleteTask={() => deleteTask(status, task.id)}
-          />
-        ))}
-      </ul>
-  </section>
+        <ul {...provided.droppableProps} ref={provided.innerRef}
+          className='col-span-2 border-b'
+          style={{borderColor: colourChoices[boardColour].hex}}
+          >
+          {tasks.map((task, idx) => (
+            <TaskCard
+              key={task.id}
+              id={task.id}
+              index={idx}
+              text={task.text}
+              deleteTask={() => deleteTask(status, task.id)}
+            />
+          ))}
+          {provided.placeholder}
+        </ul>
+      </section>
+      }
+    </Droppable>
   )
 }
 

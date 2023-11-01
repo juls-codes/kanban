@@ -55,10 +55,10 @@ const BoardView = () => {
   return (
     <>
       <BoardHeader boardColour={board.boardColour}/>
-      <main className='m-6'>
+      <main className='m-6 h-full flex flex-col'>
         <h1 className='text-2xl'>{board.name}</h1>
         <p className='text-gray-400 text-sm'>Last updated: {lastUpdated}</p>
-        <BoardInterface boardData={boardData} boardId={boardId} updateLastUpdated={handleUpdateLastUpdated} />
+        <BoardInterface boardData={boardData} boardId={boardId} boardColour={board.boardColour} updateLastUpdated={handleUpdateLastUpdated} />
       </main>
     </>
   )

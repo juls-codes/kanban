@@ -11,6 +11,7 @@ import {
 } from 'firebase/firestore';
 import { db } from '../firebase';
 import { getAuth } from 'firebase/auth';
+import { toast } from 'react-toastify';
 import useStore from '../store';
 
 // This custom hook uses Firebase Authentication and Firebase to manage user-specific collections and documents. It retrieves the currently logged-in user's unique identified (uid) and uses it to create a reference to the 'boards' collection of that specific user. 
@@ -24,7 +25,8 @@ const useApp = () => {
     try {
       await updateDoc(docRef, { tabs, lastUpdated: serverTimestamp() });
     } catch(err) {
-      console.log(err);
+      toast('Error updating board');
+      throw err;
     };
   }
 
@@ -43,7 +45,8 @@ const useApp = () => {
         id: doc.id
       });
     } catch(err) {
-      console.log(err);
+      toast('Error creating board');
+      throw err;
     }
   };
 
@@ -56,7 +59,8 @@ const useApp = () => {
         return doc.data();
       }
     } catch(err) {
-      console.log(err);
+      toast('Error fetching board');
+      throw err;
     }
   }
 
@@ -74,7 +78,7 @@ const useApp = () => {
       setBoards(boards);
       
     } catch(err) {
-      console.log(err);      
+      toast('Error fetching boards');
     } finally {
       if (setLoading) {
         setLoading(false);
