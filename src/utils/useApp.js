@@ -29,7 +29,7 @@ const useApp = () => {
   }
 
   // This function creates a new 'board' document in the user's 'boards' collection. It points to the 'boards' collection using the path defined within 'collectionRef' reference.
-  const createBoard = async (name, boardColour) => {
+  const createBoard = async ({name, boardColour}) => {
     try {
       const doc = await addDoc(collectionRef, {
         name,
