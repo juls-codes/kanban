@@ -4,6 +4,7 @@ import useStore from '../store';
 import useApp from '../utils/useApp';
 
 import AppLoader from '../components/AppLoader';
+import NotReadyNotice from '../components/BoardViewComps/NotReadyNotice';
 import BoardHeader from '../components/BoardViewComps/BoardHeader';
 import BoardInterface from '../components/BoardViewComps/BoardInterface';
 
@@ -49,8 +50,9 @@ const BoardView = () => {
     }
   }, []);
 
-  if(!board) return null;
-  if (loading) return <AppLoader />
+  if (!board) return null;
+  if (loading) return <AppLoader />;
+  if (!data) return <NotReadyNotice />;
 
   return (
     <>
