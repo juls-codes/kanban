@@ -1,6 +1,6 @@
 import TaskStatus from './TaskStatus';
 import AddTaskModal from './AddTaskModal';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import useApp from '../../utils/useApp';
 import { toast } from 'react-toastify';
 
@@ -32,10 +32,25 @@ const BoardInterface = ({boardData, boardId, updateLastUpdated}) => {
       setTabs(clone);
       setAddTaskTo();
       updateLastUpdated();
+      toast('Task added');
     } catch(err){
       console.log(err);
     }
   }
+ 
+  const handleDeleteTask = useCallback(async(tab, taskId) => {
+    const clone = structuredClone(tabs);
+    const taskIdx = clone[tab].findIndex((t) => t.id === taskId);
+    clone[tab].splice(taskIdx, 1);
+    try {
+      await updateBoard(boardId, clone);
+      setTabs(clone);
+      updateLastUpdated();
+      toast('Task deleted');
+    } catch (err) {
+      console.log(err);
+    }
+  }, [tabs]);
 
   return (
     <>
@@ -51,9 +66,11 @@ const BoardInterface = ({boardData, boardId, updateLastUpdated}) => {
         { Object.keys(statuses).map(status => 
           <TaskStatus
           key={status}
-          tabs={tabs[status]}
+          status={status}
+          tasks={tabs[status]}
           statusName={statuses[status]}
           addTask={() => setAddTaskTo(status)}
+          deleteTask={handleDeleteTask}
           />
         )}
       </div>
