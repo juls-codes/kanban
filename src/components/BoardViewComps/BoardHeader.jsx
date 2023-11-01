@@ -1,9 +1,9 @@
+import { memo } from 'react';
 import { TbArrowNarrowLeft, TbTrash } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
 import colourChoices from '../../utils/colourChoices';
 
-
-const BoardHeader = ({ boardColour }) => {
+const BoardHeader = ({ boardColour, handleDeleteboard}) => {
   const navigate = useNavigate();
   const colourIdx = boardColour;
 
@@ -20,6 +20,7 @@ const BoardHeader = ({ boardColour }) => {
       </button>
       
       <button
+        onClick={handleDeleteboard}
         className='p-1.5 rounded h-fit text-2xl hover:bg-dark focus:bg-dark outline-accent'>
         <TbTrash />
         <span className='sr-only'>Delete</span>
@@ -29,4 +30,4 @@ const BoardHeader = ({ boardColour }) => {
   )
 }
 
-export default BoardHeader
+export default memo(BoardHeader)

@@ -39,7 +39,6 @@ const BoardsView = () => {
         </section>
         }
       </main>
-
     </>
   )
 }

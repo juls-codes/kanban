@@ -17,7 +17,7 @@ const BoardView = () => {
   // To access data of the board from the document stored in the 'boards' collection, we'll use the board ID from the params
   const { boards, areBoardsFetched } = useStore();
   const { boardId } = useParams();
-  const { fetchBoard } = useApp();
+  const { fetchBoard, deleteBoard } = useApp();
   
   const board = useMemo(() => boards.find( b => b.id === boardId), []);
   const boardData = useMemo(() => data, [data]);
@@ -37,9 +37,22 @@ const BoardView = () => {
     }
   };
 
-  // useCallback hook is used to memoize our fnction to ensure it doesn't change on every render unless its dependencies change
+  // useCallback hook is used to memoize our function to ensure it doesn't change on every render unless its dependencies change
   const handleUpdateLastUpdated = useCallback(() => 
     setLastUpdated(new Date().toLocaleString('en-US')), []);
+
+  // 
+
+  const handleDeleteboard = useCallback( async() => {
+    if(!window.confirm('Are you sure you want to delete this board?')) return;
+    try {
+      setLoading(true);
+      await deleteBoard(boardId);
+    } catch(err){
+      console.log(err);
+      setLoading(false);
+    }
+  },[]);
 
   // If the user's Boards are not fetched, or if the particular Board does not exist within the database, push the user to the BoardsView. Otherwise, fetch the board data using handleFetchBoard().
   useEffect(() => {
@@ -56,7 +69,7 @@ const BoardView = () => {
 
   return (
     <>
-      <BoardHeader boardColour={board.boardColour}/>
+      <BoardHeader boardColour={board.boardColour} handleDeleteboard={handleDeleteboard}/>
       <main className='m-6 h-full flex flex-col'>
         <h1 className='text-2xl'>{board.name}</h1>
         <p className='text-gray-400 text-sm'>Last updated: {lastUpdated}</p>

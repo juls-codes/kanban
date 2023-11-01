@@ -1,6 +1,7 @@
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
@@ -12,14 +13,18 @@ import {
 import { db } from '../firebase';
 import { getAuth } from 'firebase/auth';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import useStore from '../store';
 
 // This custom hook uses Firebase Authentication and Firebase to manage user-specific collections and documents. It retrieves the currently logged-in user's unique identified (uid) and uses it to create a reference to the 'boards' collection of that specific user. 
 const useApp = () => {
+  const navigate = useNavigate();
+
   const { currentUser: { uid } } = getAuth();
   const collectionRef = collection(db, `users/${uid}/boards`);
-  const { setBoards, addBoard } = useStore();
+  const { boards, setBoards, addBoard } = useStore();
 
+  // This function updates a 'boardsData' document, referencing to that document using the boardId
   const updateBoard = async(boardId, tabs) => {
     const docRef = doc(db, `users/${uid}/boardsData/${boardId}`);
     try {
@@ -86,7 +91,23 @@ const useApp = () => {
     }
   }
 
-  return { createBoard, fetchBoard, fetchBoards, updateBoard };
+  // This function deletes a document in the user's 'boards' collection. This will also update the local state of the boards array and pushes the user back to the 'All Boards' screen.
+  const deleteBoard = async(boardId) => {
+    try {
+      const docRef = doc(db, `users/${uid}/boards/${boardId}`);
+      await deleteDoc(docRef);
+
+      const updatedBoards = boards.filter(board => board.id !== boardId);
+      setBoards(updatedBoards);
+      navigate('/boards');
+
+    } catch(err) {
+      toast('Error deleting the board');
+      throw err;
+    }
+  }
+
+  return { createBoard, fetchBoard, fetchBoards, updateBoard, deleteBoard };
 }
 
 export default useApp
