@@ -41,8 +41,6 @@ const BoardView = () => {
   const handleUpdateLastUpdated = useCallback(() => 
     setLastUpdated(new Date().toLocaleString('en-US')), []);
 
-  // 
-
   const handleDeleteboard = useCallback( async() => {
     if(!window.confirm('Are you sure you want to delete this board?')) return;
     try {

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
 import useStore from './store';
@@ -38,7 +38,7 @@ const App = () => {
         <Route path='/' element={<PublicRoute Component={AuthView} />}/>
         <Route path='/boards' element={<PrivateRoute Component={BoardsView} />}/>
         <Route path='/boards/:boardId' element={<PrivateRoute Component={BoardView} />}/>
-
+        <Route path='*' element={<Navigate to='/' replace />} />
       </Routes>
     </BrowserRouter>
     </>

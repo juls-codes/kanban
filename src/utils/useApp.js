@@ -91,7 +91,7 @@ const useApp = () => {
     }
   }
 
-  // This function deletes a document in the user's 'boards' collection. This will also update the local state of the boards array and pushes the user back to the 'All Boards' screen.
+  // This function deletes a document in the user's 'boards' collection. This will also create a new array of boards with IDs that don't match the boardID passed, update the local state of the boards array, and pushes the user back to the 'All Boards' screen.
   const deleteBoard = async(boardId) => {
     try {
       const docRef = doc(db, `users/${uid}/boards/${boardId}`);
