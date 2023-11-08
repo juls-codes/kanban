@@ -9,8 +9,7 @@ const BoardsHeader = ({ openModal }) => {
     <header className='bg-light p-4 pt-6 flex justify-between drop-shadow-md'>
 
       <div className='flex items-center gap-4 w-fit'>
-        <img src={Logo} alt='Project logo' width={20} height={20}/>
-        <h1 className='text-3xl'>Kanban</h1>
+        <img src={Logo} alt='Project logo' width={160} height={27}/>
       </div>
 
       <div className='text-2xl flex gap-2'>

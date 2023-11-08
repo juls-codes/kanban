@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'mono' : ['Space Mono', 'mono']
+      },
       colors: {
         'dark': '#21212d',
         'light': '#2C2C38',

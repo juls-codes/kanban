@@ -10,9 +10,9 @@ const TaskCard = ({index, id, text, deleteTask}) => {
         {...provided.dragHandleProps}
         {...provided.draggableProps}
         ref={provided.innerRef}
-        className='bg-light rounded flex justify-between items-center gap-4 p-2 pr-1 my-2'
+        className='bg-light rounded flex justify-between items-center gap-4 p-2 pl-3 pr-1 mb-2'
         >
-        <p className='m-1'>{text}</p>
+        <p className='line-clamp-5 break-words'>{text}</p>
         <button
           onClick={deleteTask}
           className='p-2 rounded h-fit hover:bg-dark focus:bg-dark focus:outline-accent'>
