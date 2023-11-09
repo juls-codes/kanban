@@ -16,7 +16,7 @@ const TaskStatus = ({ statusName, addTask, tasks, status, deleteTask, boardColou
         </button>
 
         <ul {...provided.droppableProps} ref={provided.innerRef}
-          className='col-span-2 border-b'
+          className='col-span-2 border-b mt-2'
           style={{borderColor: colourChoices[boardColour].hex}}
           >
           {tasks.map((task, idx) => (
