@@ -7,12 +7,14 @@ import AppLoader from '../components/AppLoader';
 import NotReadyNotice from '../components/BoardViewComps/NotReadyNotice';
 import BoardHeader from '../components/BoardViewComps/BoardHeader';
 import BoardInterface from '../components/BoardViewComps/BoardInterface';
+import DeleteBoardModal from '../components/BoardViewComps/DeleteBoardModal';
 
 const BoardView = () => {
   const navigate = useNavigate();
   const [data, setData] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   // To access data of the board from the document stored in the 'boards' collection, we'll use the board ID from the params
   const { boards, areBoardsFetched } = useStore();
@@ -41,8 +43,7 @@ const BoardView = () => {
   const handleUpdateLastUpdated = useCallback(() => 
     setLastUpdated(new Date().toLocaleString('en-US')), []);
 
-  const handleDeleteboard = useCallback( async() => {
-    if(!window.confirm('Are you sure you want to delete this board?')) return;
+  const handleDeleteBoard = useCallback( async() => {
     try {
       setLoading(true);
       await deleteBoard(boardId);
@@ -64,10 +65,12 @@ const BoardView = () => {
   if (!board) return null;
   if (loading) return <AppLoader />;
   if (!data) return <NotReadyNotice />;
-
+  
+  
   return (
     <>
-      <BoardHeader boardColour={board.boardColour} handleDeleteboard={handleDeleteboard}/>
+      <BoardHeader boardColour={board.boardColour} setShowDeleteModal={setShowDeleteModal} />
+      { showDeleteModal && <DeleteBoardModal handleDeleteBoard={handleDeleteBoard} setShowDeleteModal={setShowDeleteModal} /> }
       <main className='m-6 h-full flex flex-col'>
         <h1 className='text-2xl'>{board.name}</h1>
         <p className='text-gray-400 text-sm'>Last updated: {lastUpdated}</p>

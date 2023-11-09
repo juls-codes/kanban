@@ -3,7 +3,7 @@ import { TbArrowNarrowLeft, TbTrash } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
 import colourChoices from '../../utils/colourChoices';
 
-const BoardHeader = ({ boardColour, handleDeleteboard}) => {
+const BoardHeader = ({ boardColour, setShowDeleteModal}) => {
   const navigate = useNavigate();
   const colourIdx = boardColour;
 
@@ -20,8 +20,8 @@ const BoardHeader = ({ boardColour, handleDeleteboard}) => {
       </button>
       
       <button
-        onClick={handleDeleteboard}
-        className='p-1.5 rounded h-fit text-2xl hover:bg-dark focus:bg-dark outline-accent'>
+        onClick={setShowDeleteModal}
+        className='p-1.5 rounded h-fit text-2xl mr-2 hover:bg-dark focus:bg-dark outline-accent'>
         <TbTrash />
         <span className='sr-only'>Delete</span>
       </button>

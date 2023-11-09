@@ -66,9 +66,9 @@ const AddTaskModal = ({ statusName, onClose, addTask }) => {
       <div
         ref={modal}
         role='dialog'
-        aria-modal='true'
+        aria-labelledby='dialog-title'
         className='bg-light font-mono rounded shadow-md max-w-[400px] w-full h-fit p-4 mx-6 relative'>
-        <h3 className='text-xl mb-4'>Add Task</h3>
+        <h3 id='dialog-title' className='text-xl mb-4'>Add Task</h3>
 
         <label className='flex flex-col gap-2 my-4'>
           Task:
