@@ -26,7 +26,7 @@ const BoardsView = () => {
   return (
     <>
       <BoardsHeader openModal={() => setShowModal(true)}/>
-      { showModal && <NewBoardModal closeModal={() => setShowModal(false)}/> }
+      { showModal && <NewBoardModal showModal={showModal} closeModal={() => setShowModal(false)}/> }
       
       <main className='m-6 grow'>
         {!boards.length ?
