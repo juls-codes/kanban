@@ -6,7 +6,7 @@ const { onDocumentCreated, onDocumentDeleted } = require('firebase-functions/v2/
 initializeApp();
 
 // Each board has two firestore documents; one fetched for the boardsView and one for boardView. The latter is created via a Firestore event trigger (onDocumentCreated) when the former is created.
-exports.createboardData = onDocumentCreated('users/{uid}/boards/{boardId}', async (event) => {
+exports.createBoardData = onDocumentCreated('users/{uid}/boards/{boardId}', async (event) => {
   const { uid, boardId } = event.params;
   const firestore = getFirestore();
 
@@ -21,7 +21,7 @@ exports.createboardData = onDocumentCreated('users/{uid}/boards/{boardId}', asyn
 })
 
 // When the document of a specific boardId is deleted in the 'boards' collection, its associated document (same boardId) is deleted in the 'boardsData' collection via a Firestore event trigger (onDocumentDeleted).
-exports.deleteboardData = onDocumentDeleted('users/{uid}/boards/{boardId}', async (event) => {
+exports.deleteBoardData = onDocumentDeleted('users/{uid}/boards/{boardId}', async (event) => {
   const { uid, boardId } = event.params;
   const firestore = getFirestore();
 

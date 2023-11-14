@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import { TbArrowNarrowLeft, TbTrash } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
 import colourChoices from '../../utils/colourChoices';
@@ -6,7 +5,7 @@ import colourChoices from '../../utils/colourChoices';
 const BoardHeader = ({ boardColour, setShowDeleteModal}) => {
   const navigate = useNavigate();
   const colourIdx = boardColour;
-
+  
   return (
     <header
       style={{ borderColor: colourChoices[colourIdx].hex }} 
@@ -23,11 +22,10 @@ const BoardHeader = ({ boardColour, setShowDeleteModal}) => {
         onClick={setShowDeleteModal}
         className='p-1.5 rounded h-fit text-2xl mr-2 hover:bg-dark focus:bg-dark outline-accent'>
         <TbTrash />
-        <span className='sr-only'>Delete</span>
+        <span className='sr-only'>Delete Board</span>
       </button>
-
     </header>
   )
 }
 
-export default memo(BoardHeader)
+export default BoardHeader

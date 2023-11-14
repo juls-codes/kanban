@@ -1,7 +1,6 @@
 import { TbX } from 'react-icons/tb';
 import { Draggable } from 'react-beautiful-dnd';
 
-
 const TaskCard = ({index, id, text, deleteTask}) => {
   return (
     <Draggable draggableId={id} index={index}>
@@ -17,6 +16,7 @@ const TaskCard = ({index, id, text, deleteTask}) => {
           onClick={deleteTask}
           className='p-2 rounded h-fit hover:bg-dark focus:bg-dark focus:outline-accent'>
           <TbX />
+          <span className='sr-only'>Delete Task</span>
         </button>
       </li>
     

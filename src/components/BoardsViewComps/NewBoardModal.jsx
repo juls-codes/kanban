@@ -1,15 +1,14 @@
 import { useEffect, useState, useRef } from 'react';
+import { toast } from 'react-toastify';
 import { MdOutlineClose } from 'react-icons/md';
 import useApp from '../../utils/useApp';
 import colourChoices from '../../utils/colourChoices';
-import { toast } from 'react-toastify';
 
 const NewBoardModal = ({ showModal, closeModal }) => {
   const [name, setName] = useState('');
   const [boardColour, setBoardColour] = useState(0);
   const [loading, setLoading] = useState(false);
   const modal = useRef(null);
-
   const { createBoard } = useApp();
   
   const handleCreate = async() => {
@@ -58,19 +57,19 @@ const NewBoardModal = ({ showModal, closeModal }) => {
     if (showModal) {
       const thisModal = modal.current;
       const focusableElems = thisModal.querySelectorAll('input, button')
-      const firstElement = focusableElems[0];
-      const lastElement = focusableElems[focusableElems.length - 1];
+      const firstElem = focusableElems[0];
+      const lastElem = focusableElems[focusableElems.length - 1];
 
-      firstElement.focus();
+      firstElem.focus();
       
-      const handleTabKeyPress = (event) => {
-        if (event.key === 'Tab') {
-          if (event.shiftKey && document.activeElement === firstElement) {
-            event.preventDefault();
-            lastElement.focus();
-          } else if (!event.shiftKey && document.activeElement === lastElement) {
-            event.preventDefault();
-            firstElement.focus();
+      const handleTabKeyPress = (e) => {
+        if (e.key === 'Tab') {
+          if (e.shiftKey && document.activeElement === firstElem) {
+            e.preventDefault();
+            lastElem.focus();
+          } else if (!e.shiftKey && document.activeElement === lastElem) {
+            e.preventDefault();
+            firstElem.focus();
           }
         }
       };
@@ -128,7 +127,7 @@ const NewBoardModal = ({ showModal, closeModal }) => {
         </div>
       </fieldset>
 
-      <button onClick={handleCreate} disabled={loading} className='bg-accent rounded w-full p-2 mb-2 hover:bg-dark focus:bg-dark outline-accent'>Create</button>
+      <button onClick={handleCreate} disabled={loading} className='bg-accent rounded w-full p-2 mb-2 hover:bg-opacity-80 focus:bg-dark outline-accent'>Create</button>
 
       <button
         onClick={closeModal}

@@ -94,20 +94,20 @@ const BoardInterface = ({boardData, boardId, boardColour, updateLastUpdated}) =>
       }
 
       <DragDropContext onDragEnd={handleDragDrop}>
-      <div className='sm:grid grid-cols-3 gap-4 lg:gap-6 grow'>
-        { Object.keys(statuses).map(status => 
-          <TaskStatus
-          key={status}
-          status={status}
-          tasks={tabs[status]}
-          statusName={statuses[status]}
-          addTask={() => setAddTaskTo(status)}
-          deleteTask={handleDeleteTask}
-          boardColour={boardColour}
-          />
-        )}
-      </div>
-    </DragDropContext>
+        <div className='sm:grid grid-cols-3 gap-4 lg:gap-6 grow'>
+          { Object.keys(statuses).map(status => 
+            <TaskStatus
+            key={status}
+            status={status}
+            tasks={tabs[status]}
+            statusName={statuses[status]}
+            addTask={() => setAddTaskTo(status)}
+            deleteTask={handleDeleteTask}
+            boardColour={boardColour}
+            />
+          )}
+        </div>
+      </DragDropContext>
     </>
   )
 }

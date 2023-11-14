@@ -12,10 +12,14 @@ const TaskStatus = ({ statusName, addTask, tasks, status, deleteTask, boardColou
         <h2 className='uppercase text-gray-400'>{statusName}</h2>
         <button
           onClick={addTask}
-          className='p-2 text-2xl rounded h-max hover:bg-light focus:bg-light outline-accent'><TbPlus />
+          className='p-2 text-2xl rounded h-max hover:bg-light focus:bg-light outline-accent'>
+            <TbPlus />
+            <p className='sr-only'>Add Task</p>
         </button>
 
-        <ul {...provided.droppableProps} ref={provided.innerRef}
+        <ul
+          {...provided.droppableProps}
+          ref={provided.innerRef}
           className='col-span-2 border-b mt-2'
           style={{borderColor: colourChoices[boardColour].hex}}
           >

@@ -49,19 +49,19 @@ const DeleteBoardModal = ({handleDeleteBoard, setShowDeleteModal}) => {
   useEffect(() => {
     const thisModal = modal.current;
     const focusableElems = thisModal.querySelectorAll('button')
-    const firstElement = focusableElems[0];
-    const lastElement = focusableElems[focusableElems.length - 1];
+    const firstElem = focusableElems[0];
+    const lastElem = focusableElems[focusableElems.length - 1];
 
-    lastElement.focus();
+    lastElem.focus();
     
     const handleTabKeyPress = (event) => {
       if (event.key === 'Tab') {
-        if (event.shiftKey && document.activeElement === firstElement) {
+        if (event.shiftKey && document.activeElement === firstElem) {
           event.preventDefault();
-          lastElement.focus();
-        } else if (!event.shiftKey && document.activeElement === lastElement) {
+          lastElem.focus();
+        } else if (!event.shiftKey && document.activeElement === lastElem) {
           event.preventDefault();
-          firstElement.focus();
+          firstElem.focus();
         }
       }
     };

@@ -15,7 +15,8 @@ export default {
         'accent': '#625AFF',
       },
       gridTemplateColumns: {
-        'frAuto': '1fr, auto'
+        'frAuto': '1fr, auto',
+        'frAutoAuto': '1fr, auto, auto'
       },
       gridTemplateRows: {
         'frAuto': '1fr, auto',

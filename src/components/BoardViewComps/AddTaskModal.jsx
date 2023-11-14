@@ -36,19 +36,19 @@ const AddTaskModal = ({ statusName, onClose, addTask }) => {
     if (addTask) {
       const thisModal = modal.current;
       const focusableElems = thisModal.querySelectorAll('input, button')
-      const firstElement = focusableElems[0];
-      const lastElement = focusableElems[focusableElems.length - 1];
+      const firstElem = focusableElems[0];
+      const lastElem = focusableElems[focusableElems.length - 1];
 
-      firstElement.focus();
+      firstElem.focus();
       
       const handleTabKeyPress = (event) => {
         if (event.key === 'Tab') {
-          if (event.shiftKey && document.activeElement === firstElement) {
+          if (event.shiftKey && document.activeElement === firstElem) {
             event.preventDefault();
-            lastElement.focus();
-          } else if (!event.shiftKey && document.activeElement === lastElement) {
+            lastElem.focus();
+          } else if (!event.shiftKey && document.activeElement === lastElem) {
             event.preventDefault();
-            firstElement.focus();
+            firstElem.focus();
           }
         }
       };
@@ -59,7 +59,6 @@ const AddTaskModal = ({ statusName, onClose, addTask }) => {
       };
     };
   }, [addTask])
-
 
   return (
     <div className='absolute top-0 left-0 w-full h-full bg-dark/90 flex justify-center items-center'>
