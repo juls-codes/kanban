@@ -16,7 +16,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import useStore from '../store';
 
-// This custom hook uses Firebase Authentication and Firebase to manage user-specific collections and documents. It retrieves the currently logged-in user's unique identified (uid) and uses it to create a reference to the 'boards' collection of that specific user. 
+// This custom hook uses Firebase Auth and Firestore to manage user-specific collections and documents. It retrieves the currently logged-in user's unique identified (uid) and uses it to create a reference to the 'boards' collection of that specific user. 
 const useApp = () => {
   const navigate = useNavigate();
 
