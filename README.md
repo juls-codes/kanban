@@ -69,7 +69,7 @@ npm run dev
 ```
 2. Open your browser and go to http://localhost:XXXX/ to see the app in action. Make sure the port (XXXX) in the URL matches the port where your development server is running.
 
-## Acknowledgments
+## Acknowledgements
 A tutorial by [Desi Codes](https://www.youtube.com/@desicodes) was used as valuable reference to this project. A special thanks to [Desi Codes](https://www.youtube.com/@desicodes) for sharing their knowledge and contributing to the developer community.
 
 [Back to Top](#kanban-board-app)
