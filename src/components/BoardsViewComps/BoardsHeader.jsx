@@ -7,7 +7,7 @@ const BoardsHeader = ({ showNewBoardModal }) => {
 
   return (
     <header className='bg-light drop-shadow-md'>
-      <div className='grid grid-cols-frAutoAuto max-w-xl mx-auto space-x-3 p-4 pt-8'>
+      <div className='grid grid-cols-frAutoAuto max-w-xl mx-auto space-x-3 p-4'>
         <img src={Logo} alt='Project logo' width={160} height={27} />
 
         <button

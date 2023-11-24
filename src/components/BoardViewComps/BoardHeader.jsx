@@ -9,7 +9,7 @@ const BoardHeader = ({ boardColour, setShowDeleteModal}) => {
   return (
     <header
       style={{ borderColor: colourChoices[colourIdx].hex }} 
-      className='bg-light p-4 pt-8 border-b-2 rounded flex justify-between items-center'
+      className='bg-light p-4 border-b-2 rounded flex justify-between items-center'
       >
       <button
         onClick={() => navigate('/boards')}
